@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `article` (
 --
 
 INSERT INTO `article` (`article_id`, `title`, `content`, `create_date`, `modify_date`, `comment_count`, `browse_count`, `type`, `status`, `user_id`) VALUES
-(1, '第一张', '是的发撒旦发射点发撒旦法', '2013-10-01', '2013-10-16', 0, 0, 0, 1, 1);
+(1, '第一张', '这里会有很多精彩的内容....', '2013-10-01', '2013-10-16', 0, 0, 0, 1, 1);
 
 -- --------------------------------------------------------
 
