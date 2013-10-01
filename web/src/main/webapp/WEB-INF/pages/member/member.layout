@@ -1,0 +1,75 @@
+@args String title,String blogTitle,String message,List<String> errors,boolean isRegister,String allRegister
+@extends(common.layout,title: title,blogTitle: blogTitle)
+@section(header){
+    <meta name='robots' content='noindex,nofollow' />
+    <link rel='stylesheet' id='wp-admin-css'  href='@url("/Content/Admin/css/wp-admin.min.css")' type='text/css' media='all' />
+    <link rel='stylesheet' id='buttons-css'  href='@url("/Content/Include/css/buttons.min.css")' type='text/css' media='all' />
+    <link rel='stylesheet' id='colors-fresh-css'  href='@url("/Content/Admin/css/colors-fresh.min.css")' type='text/css' media='all' />
+}
+
+@section(bodyClass){login login-action-login wp-core-ui}
+
+    <div id="login">
+        <h1><a href="@url("/")">@blogTitle</a></h1>
+
+        @if (message != null && message.length()>0)
+        {
+            <p class="message">
+                <strong>@message.raw()</strong>
+            </p>
+        }
+
+        @if (errors != null && errors.size()>0)
+        {
+            <script type="text/javascript">
+                addLoadEvent = function (func) { if (typeof jQuery != "undefined") jQuery(document).ready(func); else if (typeof wpOnload != 'function') { wpOnload = func; } else { var oldonload = wpOnload; wpOnload = function () { oldonload(); func(); } } };
+                function s(id, pos) { g(id).left = pos + 'px'; }
+                function g(id) { return document.getElementById(id).style; }
+                function shake(id, a, d) { c = a.shift(); s(id, c); if (a.length > 0) { setTimeout(function () { shake(id, a, d); }, d); } else { try { g(id).position = 'static'; wp_attempt_focus(); } catch (e) { } } }
+                addLoadEvent(function () { var p = new Array(15, 30, 15, 0, -15, -30, -15, 0); p = p.concat(p.concat(p)); var i = document.forms[0].id; g(i).position = 'relative'; shake(i, p, 20); });
+            </script>
+            <div id="login_error">
+                @for (error : errors)
+                {
+                    <strong>错误：</strong>@error.raw()<br />
+                }
+            </div>
+        }
+
+
+        @render()
+
+        <p id="nav">
+            @if (allRegister != "0")
+            {
+                @if (isRegister == true)
+                {
+                <a href="@url("/member/login")">登录</a>
+                }
+                else
+                {
+                <a href="@url("/member/register")">注册</a>
+                }
+                |
+            } <a title="找回密码" href="@url("/member/lostPassword")">忘记密码？</a>
+        </p>
+
+        <script type="text/javascript">
+            function wp_attempt_focus() {
+                setTimeout(function () {
+                    try {
+                        d = document.getElementById('user_login');
+                        d.focus();
+                        d.select();
+                    } catch (e) { }
+                }, 200);
+            }
+            if (typeof wpOnload == 'function') wpOnload();
+        </script>
+
+        <p id="backtoblog">
+            <a href="@url("/")" title="不知道自己在哪？">&larr; 回到 @blogTitle</a>
+        </p>
+
+    </div>
+

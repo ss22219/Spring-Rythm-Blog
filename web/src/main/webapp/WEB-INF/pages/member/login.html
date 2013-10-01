@@ -1,0 +1,23 @@
+@args String returnUrl,String message,List<String> errors
+@extends(member/member.layout,title: "登录",isRegister: false,errors: errors,message: message)
+    <form name="loginform" id="loginform" method="post">
+    <input type="hidden" name="returnUrl" value="@returnUrl">
+    <p>
+        <label for="user_login">
+            用户名<br />
+            <input type="text" name="userName" id="user_login" class="input" value="" size="20" /></label>
+    </p>
+    <p>
+        <label for="user_pass">
+            密码<br />
+            <input type="password" name="password" id="user_pass" class="input" value="" size="20" /></label>
+    </p>
+    <p class="forgetmenot">
+        <label for="rememberme">
+            <input name="rememberMe" type="checkbox" id="rememberMe" value="forever" />
+            记住我的登录信息</label>
+    </p>
+    <p class="submit">
+        <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="登录" />
+    </p>
+    </form>
