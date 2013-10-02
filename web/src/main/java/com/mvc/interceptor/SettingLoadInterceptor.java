@@ -1,5 +1,7 @@
 package com.mvc.interceptor;
 
+import com.mvc.service.ArticleService;
+import com.mvc.service.CategoryService;
 import com.mvc.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -13,7 +15,11 @@ import java.util.logging.Logger;
 
 public class SettingLoadInterceptor implements HandlerInterceptor {
     @Autowired
-    public SettingService settingService;
+    private SettingService settingService;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private ArticleService articleService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse httpServletResponse, Object o) throws Exception {
@@ -27,6 +33,13 @@ public class SettingLoadInterceptor implements HandlerInterceptor {
                 Map<String, String> map = settingService.getSettings();
                 for (String key : map.keySet()) {
                     modelAndView.addObject(key, map.get(key));
+                }
+
+                if (request.getRequestURI().indexOf("/admin/") == -1) {
+                    modelAndView.addObject("lastArticle", articleService.getLastArticle());
+                    modelAndView.addObject("monthCategory", categoryService.getMonthCategory());
+                    modelAndView.addObject("categories", categoryService.getCategorys());
+
                 }
             }
         } catch (Exception e) {

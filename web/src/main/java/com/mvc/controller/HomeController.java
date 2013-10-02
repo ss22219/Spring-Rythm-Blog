@@ -23,13 +23,6 @@ public class HomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap modelMap) {
-        List<Category> categories = categoryService.getCategorys();
-        List<Article> lastArticle = articleService.getLastArticle();
-        Map<String,String> monthCategory = categoryService.getMonthCategory();
-        modelMap.addAttribute("categories",categories);
-        modelMap.addAttribute("lastArticle",lastArticle);
-        modelMap.addAttribute("monthCategory",monthCategory);
-
         return "index";
     }
 }

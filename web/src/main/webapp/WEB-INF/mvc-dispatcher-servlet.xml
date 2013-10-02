@@ -17,6 +17,7 @@
 
     <mvc:interceptors>
         <bean class="com.mvc.interceptor.SettingLoadInterceptor"/>
+        <bean class="com.mvc.interceptor.SecurityInterceptor"/>
     </mvc:interceptors>
 
     <mvc:resources mapping="/Scripts/**" location="/Scripts/"/>
@@ -27,7 +28,6 @@
     <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
 
     <bean id="rythmConfigurator" class="com.ctlok.springframework.web.servlet.view.rythm.RythmConfigurator">
-        <property name="mode" value="prod"/>
         <property name="rootDirectory" value="/WEB-INF/pages/"/>
         <property name="tags">
             <list>

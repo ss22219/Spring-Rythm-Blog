@@ -110,4 +110,10 @@ public class MemberController {
         modelMap.addAttribute("errors", errors);
         return "member/lostPassword";
     }
+
+    @RequestMapping(value = "/logOut")
+    public void logOut(HttpServletResponse response, HttpServletRequest request) throws IOException {
+        request.getSession().invalidate();
+        response.sendRedirect("/member/login?message=" + URLEncoder.encode("你已经成功退出登录。", "utf-8"));
+    }
 }

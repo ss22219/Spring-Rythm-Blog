@@ -30,4 +30,9 @@ public class CategoryRepository extends BaseRepository<Category> {
         }
         return map;
     }
+
+    public Category getCategoryByName(String name, int type) {
+        List<Category> list = getSession().createQuery("from Category where name=? and type=" + type).setParameter(0, name).setMaxResults(1).list();
+        return list.size() > 0 ? list.get(0) : null;
+    }
 }

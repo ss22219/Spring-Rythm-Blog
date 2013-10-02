@@ -38,7 +38,7 @@ public class CalendarTag extends JavaTagBase {
         };
         Date dateNow = new Date();
         ///构造表头
-        sb.append("<table id=\"wp-calendar\"><caption>" + dateNow.getYear() + " 年" + dateNow.getMonth() + "月" + "</caption><thead><tr>");
+        sb.append("<table id=\"wp-calendar\"><caption>" + (dateNow.getYear() + 1900) + " 年" + dateNow.getMonth() + "月" + "</caption><thead><tr>");
 
         ///一个月中第几天
         int monthDay = 0;
@@ -60,6 +60,7 @@ public class CalendarTag extends JavaTagBase {
         Date startDay = calendar.getTime();
         calendar.add(Calendar.MONTH, 1);
         calendar.set(Calendar.DATE, 1);
+        calendar.add(Calendar.DATE, -1);
 
         ///一个月的结束日期
         Date endDay = calendar.getTime();
@@ -94,7 +95,7 @@ public class CalendarTag extends JavaTagBase {
                     title += item.getTitle() + " ";
                 }
 
-                data = "<a href=\"/Category/Day/" + startDay.getYear() + "-" + startDay.getMonth() + "-" + monthDay + "\" title=\"" + title + "\" >" + monthDay + "</a>";
+                data = "<a href=\"/category/day/" + (startDay.getYear() + 1900) + "-" + (startDay.getMonth() + 1) + "-" + monthDay + "\" title=\"" + title + "\" >" + monthDay + "</a>";
 
             } else {
                 data = monthDay + "";
@@ -116,6 +117,7 @@ public class CalendarTag extends JavaTagBase {
             }
         }
         sb.append("</tr></tbody></table>");
+        this.p(sb.toString());
     }
 
     private void buildDayArticle(int day, List<Article> list) {

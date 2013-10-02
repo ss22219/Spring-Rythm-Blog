@@ -64,7 +64,7 @@
                             {
                                 @if( cat.getType() == 1 )
                                 {
-                                    <a href="@url("category/tag/")@cat.getCategoryId()" class="tag-link-@cat.getCategoryId()" title="@cat.getArticleCount() 个话题" style="font-size: 8pt;">@cat.getName()</a>
+                                    <a href="@url("category/tag/")@cat.getName()" class="tag-link-@cat.getCategoryId()" title="@cat.getArticleCount() 个话题" style="font-size: 8pt;">@cat.getName()</a>
                                 }
                             }
 
@@ -129,7 +129,7 @@
                 <div class="e1">
                     <div class="e1_1">
                         <h3><a href="@url("/article/")@article.getArticleId()">@article.getTitle()</a> </h3>
-                        <div class="f1">@article.getCreateDate().format("yyyy年MM月dd日")　分类：
+                        <div class="f1">@article.getCreateDate().format("yyyy年M月d日")　分类：
                             @{
                                 List<Category> cats = new ArrayList<Category>();
                                 for(Category cat : article.getCategorys()){
@@ -158,3 +158,25 @@
         </div>
     </div>
 </div>
+<div id="main_zzjs_net">
+    <div id="float_zzjs">
+        <div class="logo_1">
+            <img src="@url("Content/themes/BlueSpace/images/logo.jpg")" />
+        </div>
+        <div class="dh1_1">
+            <img src="@url("Content/themes/BlueSpace/images/dhb_1.jpg")" />
+        </div>
+        <div id="navigation">
+            <div class="menu">
+                <ul>
+                    <li class="page_item page-item-2"><a href="@url("/")">首页</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="dh1_1">
+            <img src="@url("Content/themes/BlueSpace/images/dhb_2.png")" />
+        </div>
+    </div>
+</div>
+@include(index_head.html)
+@include(index_foot.html)

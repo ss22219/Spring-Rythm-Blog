@@ -1,5 +1,6 @@
 package com.mvc.repository;
 
+import com.google.appengine.repackaged.com.google.common.base.Flag;
 import com.mvc.model.Article;
 import com.mvc.model.Category;
 import org.springframework.stereotype.Repository;
@@ -14,21 +15,21 @@ public class ArticleRepository extends BaseRepository<Article> {
     }
 
     public List<Article> getArticleByDay(Date day, int pageIndex, int pageSize) {
-        return getSession().createSQLQuery("select * from article where day(create_date) = " + day.getDay() + " and month(create_date) = " + day.getMonth() + "  and year(create_date) =" + day.getYear()).list();
+        return getSession().createSQLQuery("select * from article where day(create_date) = " + day.getDay() + " and month(create_date) = " + (day.getMonth() + 1) + "  and year(create_date) =" + (day.getYear() + 1900)).addEntity(Article.class).list();
     }
 
     public int getDayArticleCount(Date day) {
-        List list = getSession().createSQLQuery("select count(*) from article where day(create_date) = " + day.getDay() + " and month(create_date) = " + day.getMonth() + "  and year(create_date) =" + day.getYear()).list();
+        List list = getSession().createSQLQuery("select count(*) from article where day(create_date) = " + day.getDay() + " and month(create_date) = " + (day.getMonth() + 1) + "  and year(create_date) =" + (day.getYear() + 1900)).list();
         return list.size() == 0 ? 0 : Integer.parseInt(list.get(0).toString());
     }
 
     public List<Article> getArticleByMonth(Date day, int pageIndex, int pageSize) {
-        return getSession().createSQLQuery("select * from article where month(create_date) = " + day.getMonth() + "  and year(create_date) =" + day.getYear())
+        return getSession().createSQLQuery("select * from article where month(create_date) = " + (day.getMonth() + 1) + "  and year(create_date) =" + (day.getYear() + 1900)).addEntity(Article.class)
                 .setFirstResult((pageIndex - 1) * pageSize).setMaxResults(pageSize).list();
     }
 
     public int getMonthArticleCount(Date date) {
-        List list = getSession().createSQLQuery("select count(*) from article where month(create_date) = " + date.getMonth() + "  and year(create_date) =" + date.getYear()).list();
+        List list = getSession().createSQLQuery("select count(*) from article where month(create_date) = " + (date.getMonth() + 1) + "  and year(create_date) =" + (date.getYear() + 1900)).list();
         return list.size() == 0 ? 0 : Integer.parseInt(list.get(0).toString());
     }
 

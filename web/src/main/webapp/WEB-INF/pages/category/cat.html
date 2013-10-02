@@ -1,0 +1,14 @@
+@import com.mvc.model.*, com.mvc.util.*
+@args(){
+    String blogTitle,
+    String webSite,
+    String title,
+    String blogDescription,
+    List<Category> categories,
+    List<Article> lastArticle,
+    boolean isAdmin,
+    String allRegister,
+    Map<String,String> monthCategory,
+    boolean isLogin
+}
+@extends(content.layout,title: "分类",blogTitle: blogTitle,blogDescription: blogDescription,webSite: webSite,lastArticle: lastArticle,allRegister: allRegister,categories: categories,monthCategory: monthCategory,isLogin: isLogin,isAdmin: isAdmin)

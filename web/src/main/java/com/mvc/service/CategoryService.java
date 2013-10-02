@@ -21,7 +21,11 @@ public class CategoryService {
         return categoryRepository.getCategory(id);
     }
 
-    public Map<String,String> getMonthCategory(){
+    public Map<String, String> getMonthCategory() {
         return categoryRepository.getMonthCategory();
+    }
+
+    public Category getTag(String name) {
+        return categoryRepository.getCategoryByName(name, 1);
     }
 }
