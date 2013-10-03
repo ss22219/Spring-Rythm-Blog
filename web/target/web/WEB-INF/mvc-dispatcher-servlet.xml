@@ -29,6 +29,7 @@
 
     <bean id="rythmConfigurator" class="com.ctlok.springframework.web.servlet.view.rythm.RythmConfigurator">
         <property name="rootDirectory" value="/WEB-INF/pages/"/>
+        <property name="mode" value="dev"/>
         <property name="tags">
             <list>
                 <bean class="com.mvc.util.SubStringTag"/>
