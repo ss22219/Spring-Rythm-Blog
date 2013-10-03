@@ -1,7 +1,9 @@
 package com.mvc.interceptor;
 
+import com.mvc.repository.CommentRepository;
 import com.mvc.service.ArticleService;
 import com.mvc.service.CategoryService;
+import com.mvc.service.CommentService;
 import com.mvc.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -20,6 +22,8 @@ public class SettingLoadInterceptor implements HandlerInterceptor {
     private CategoryService categoryService;
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private CommentService commentService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse httpServletResponse, Object o) throws Exception {
@@ -37,9 +41,9 @@ public class SettingLoadInterceptor implements HandlerInterceptor {
 
                 if (request.getRequestURI().indexOf("/admin/") == -1) {
                     modelAndView.addObject("lastArticle", articleService.getLastArticle());
+                    modelAndView.addObject("lastComment", commentService.getLastComment());
                     modelAndView.addObject("monthCategory", categoryService.getMonthCategory());
-                    modelAndView.addObject("categories", categoryService.getCategorys());
-
+                    modelAndView.addObject("categories", categoryService.getCategories());
                 }
             }
         } catch (Exception e) {

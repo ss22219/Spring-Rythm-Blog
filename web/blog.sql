@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 02, 2013 at 01:24 AM
+-- Generation Time: Oct 03, 2013 at 05:38 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `article` (
   `browse_count` int(11) NOT NULL,
   `type` int(11) NOT NULL,
   `status` int(11) NOT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`article_id`),
   KEY `user_id` (`user_id`)
@@ -45,8 +46,8 @@ CREATE TABLE IF NOT EXISTS `article` (
 -- Dumping data for table `article`
 --
 
-INSERT INTO `article` (`article_id`, `title`, `content`, `create_date`, `modify_date`, `comment_count`, `browse_count`, `type`, `status`, `user_id`) VALUES
-(1, '第一张', '这里会有很多精彩的内容....', '2013-10-01', '2013-10-16', 0, 0, 0, 1, 1);
+INSERT INTO `article` (`article_id`, `title`, `content`, `create_date`, `modify_date`, `comment_count`, `browse_count`, `type`, `status`, `deleted`, `user_id`) VALUES
+(1, '第一张', '是的发撒旦发射点发撒旦法', '2013-10-01', '2013-10-16', 0, 0, 0, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -69,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `category` (
 --
 
 INSERT INTO `category` (`category_id`, `name`, `type`, `article_count`, `parent_id`) VALUES
-(2, '未分类', 0, 0, NULL),
+(2, '未分类', 0, 1, NULL),
 (3, '子集', 0, 0, 2),
 (4, '子集2', 0, 0, 3),
 (5, '标记', 1, 0, NULL);
@@ -87,14 +88,42 @@ CREATE TABLE IF NOT EXISTS `category_relation` (
   PRIMARY KEY (`category_relation`),
   KEY `category_id` (`category_id`),
   KEY `article_id` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `category_relation`
 --
 
 INSERT INTO `category_relation` (`category_id`, `article_id`, `category_relation`) VALUES
-(2, 1, 1);
+(2, 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment`
+--
+
+CREATE TABLE IF NOT EXISTS `comment` (
+  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `article_id` int(11) NOT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `status` int(11) NOT NULL,
+  `create_date` date NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `user_ip` varchar(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  PRIMARY KEY (`comment_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`comment_id`, `article_id`, `parent_id`, `deleted`, `status`, `create_date`, `user_name`, `user_email`, `user_ip`, `user_id`, `content`) VALUES
+(1, 1, NULL, 0, 1, '2013-10-03', '幻影gool', 'ss22219@qq.com', '127.0.0.1', 1, '哈哈');
 
 -- --------------------------------------------------------
 
@@ -117,9 +146,15 @@ INSERT INTO `setting` (`key`, `value`) VALUES
 ('articlePageSize', '10'),
 ('blogDescription', '那一抹温暖的阳光，是我们永恒的向往。'),
 ('blogTitle', '蓝色空间'),
+('closeComment', '0'),
+('commentPageSize', '5'),
 ('defaultRole', '0'),
 ('defaultStatus', '1'),
+('defualtCommentSatus', '1'),
 ('lastArticleCount', '10'),
+('lastCommentCount', '5'),
+('maxReComment', '5'),
+('notLoginComment', '1'),
 ('webSite', 'GOOL.COM.CN'),
 ('weekStart', '0');
 

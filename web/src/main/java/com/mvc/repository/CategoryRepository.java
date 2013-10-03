@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Repository
 public class CategoryRepository extends BaseRepository<Category> {
-    public List<Category> getCategorys() {
+    public List<Category> getCategories() {
         return getSession().createQuery("from Category where parent=null ").list();
     }
 
@@ -24,8 +24,8 @@ public class CategoryRepository extends BaseRepository<Category> {
         for (String str : strings) {
             if (str.length() > 0) {
                 String year = str.substring(0, str.indexOf('-'));
-                String moth = str.substring(str.indexOf('-') + 1, str.length());
-                map.put(str, year + "年" + moth + "月");
+                String month = str.substring(str.indexOf('-') + 1, str.length());
+                map.put(str, year + "年" + month + "月");
             }
         }
         return map;

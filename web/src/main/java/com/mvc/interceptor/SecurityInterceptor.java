@@ -16,7 +16,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         if (request.getRequestURI().indexOf("/admin") != -1) {
-            if (request.getSession().getAttribute("user") == null || ((User) request.getSession().getAttribute("user")).getRole() != DomainType.AdminRole) {
+            if (request.getSession().getAttribute("user") == null || ((User) request.getSession().getAttribute("user")).getRole() != DomainType.Admin) {
                 response.sendError(404);
                 return false;
             }
@@ -32,7 +32,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
                 if (request.getSession().getAttribute("user") != null) {
                     modelAndView.addObject("user", request.getSession().getAttribute("user"));
                     modelAndView.addObject("isLogin", true);
-                    if (((User) request.getSession().getAttribute("user")).getRole() == DomainType.AdminRole) {
+                    if (((User) request.getSession().getAttribute("user")).getRole() == DomainType.Admin) {
                         modelAndView.addObject("isAdmin", true);
                     }
                 }

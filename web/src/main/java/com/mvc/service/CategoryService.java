@@ -1,5 +1,6 @@
 package com.mvc.service;
 
+import com.mvc.domain.DomainType;
 import com.mvc.model.Category;
 import com.mvc.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,8 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<Category> getCategorys() {
-        return categoryRepository.getCategorys();
+    public List<Category> getCategories() {
+        return categoryRepository.getCategories();
     }
 
     public Category getCategory(int id) {
@@ -26,6 +27,6 @@ public class CategoryService {
     }
 
     public Category getTag(String name) {
-        return categoryRepository.getCategoryByName(name, 1);
+        return categoryRepository.getCategoryByName(name, DomainType.Tag);
     }
 }

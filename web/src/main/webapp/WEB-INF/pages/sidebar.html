@@ -1,0 +1,107 @@
+@import com.mvc.model.*, com.mvc.util.*
+@args(){
+    List<Category> categories,
+    List<Article> lastArticle,
+    List<Comment> lastComment,
+    boolean isAdmin,
+    String allRegister,
+    Map<String,String> monthCategory,
+    boolean isLogin
+}
+<div class="g3_1">
+    <link rel="stylesheet" href="@url("/Content/themes/BlueSpace/css/sidebar.css")" type="text/css" />
+    <div id="sidebar">
+        <div id="search-2" class="widget widget_search">
+            <form action="@url("/search/")" id = "searchform2">
+            <div>
+                <label for="s" class="screen-reader-text"></label>
+                <input type="text" id="s" name="s" value="" />
+                <input type="submit" value="搜索" id="searchsubmit" onclick="window.location.href = '@url("/search/")' + $('#searchform2 #s').val(); return false;" />
+            </div>
+            </form>
+        </div>
+        <div id="recent-posts-2" class="widget widget_recent_entries">
+            <h2>近期文章</h2>
+            <ul>
+                @for (Article item : lastArticle)
+                {
+                <li>
+                    <a href="@url("/article/")@item.getTitle()" id="item.getArticleId()">@item.getTitle()</a>
+                </li>
+                }
+            </ul>
+        </div>
+        <div id="recent-comments-2" class="widget widget_recent_comments">
+            <h2>近期评论</h2>
+            <ul id="recentcomments">
+                @for (Comment comment : lastComment)
+                {
+                <li class="recentcomments">@comment.getUserName() 发表在《<a href="@url("/article/")@comment.getArticleId()-@comment.getCommentId()#comment-@comment.getCommentId()" title="@comment.getArticle().getTitle()">@comment.getArticle().getTitle()</a>》</li>
+                }
+            </ul>
+        </div>
+        <div id="archives-2" class="widget widget_archive">
+            <h2>文章归档</h2>
+            <ul>
+                @for (String key in monthCategory.keySet())
+                {
+                <li>
+                    <a href="@url("/category/month/")@key" id="@key">@monthCategory.get(key)</a>
+                </li>
+                }
+            </ul>
+        </div>
+        <div id="categories-2" class="widget widget_categories">
+            <h2>分类目录</h2>
+            <ul>
+                @for (Category category : categories)
+                {
+                @if(category.getType() == com.mvc.domain.DomainType.Category){
+                <li class="cat-item cat-item-@category.getCategoryId()"><a href="@url("/category/cat/")@category.getCategoryId()" id ="@category.getCategoryId()">@category.getName()</a></li>
+                }
+                }
+            </ul>
+        </div>
+        <div id="meta-2" class="widget widget_meta">
+            <h2>功能</h2>
+            <ul>
+                @if (!isLogin)
+                {
+                    @if (allRegister.equals("1"))
+                    {
+                        <li><a href="@url("/member/register")">注册</a> </li>
+                    }
+                <li><a href="@url("/member/login")">登录</a></li>
+                }
+                else
+                {
+                @if (isAdmin)
+                {
+                <li><a href="@url("/admin/")">管理</a></li>
+                }
+                else
+                {
+                <li><a href="@url("/admin/user/")">个人资料</a></li>
+                }
+                <li><a href="@url("/member/logOut/")">登出</a></li>
+                }
+            </ul>
+        </div>
+        <!----评论----->
+        <div class="pl_1">
+            <h2>最新评论</h2>
+            <ul>
+                @for (Comment comment in lastComment)
+                {
+                <li>
+                    <div class='clly_1'>
+                        <img alt='' src='@picture(comment.getUser().getPicture())' class='avatar avatar-31 photo avatar-default' height='31' width='31' />
+                    </div>
+                    <div class='clly_2'>@(comment.getUser() == null ? comment.getUserName() : comment.getUser().getNiceName())说道：</div>
+                    <div class='clly_3'><a href="@url("/article/")@comment.getArticle().getArticleId()-@comment.getCommentId()#comment-@comment.getCommentId()" title="@comment.getArticle().getTitle() 上的评论">@subString(comment.getContent(), 15, "")</a></div>
+                </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

@@ -10,6 +10,8 @@ public class Category {
     private int type;
     private int articleCount;
     private Category parent;
+    private List<Category> children;
+    private List<Article> articles;
 
     @Column(name = "category_id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
@@ -85,10 +87,16 @@ public class Category {
         this.parent = parent;
     }
 
-    private List<Article> articles;
+    @OneToMany(mappedBy = "parent")
+    public List<Category> getChildren() {
+        return children;
+    }
 
-    @ManyToMany(targetEntity = Article.class)
-    @JoinTable(name = "category_relation",joinColumns = {@JoinColumn(name = "category_id")},inverseJoinColumns = {@JoinColumn(name = "article_id")})
+    public void setChildren(List<Category> children) {
+        this.children = children;
+    }
+
+    @ManyToMany(mappedBy = "categories")
     public List<Article> getArticles() {
         return articles;
     }

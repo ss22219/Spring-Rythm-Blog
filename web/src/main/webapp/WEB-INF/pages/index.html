@@ -50,7 +50,7 @@
                         <ul>
                             @for ( Category cat : categories )
                             {
-                                @if( cat.getType() == 0 && cat.getParent() == null )
+                                @if( cat.getType() == com.mvc.domain.DomainType.Category && cat.getParent() == null )
                                 {
                                     <li class="cat-item cat-item-@cat.getCategoryId()"><a href="@url("category/cat/")@cat.getCategoryId()" title="查看 @cat.getName() 下的所有文章">@cat.getName()</a> (@cat.getArticleCount())</li>
                                 }
@@ -62,7 +62,7 @@
                         <div class="sy1_2">
                             @for (Category cat : categories)
                             {
-                                @if( cat.getType() == 1 )
+                                @if( cat.getType() == com.mvc.domain.DomainType.Tag )
                                 {
                                     <a href="@url("category/tag/")@cat.getName()" class="tag-link-@cat.getCategoryId()" title="@cat.getArticleCount() 个话题" style="font-size: 8pt;">@cat.getName()</a>
                                 }
@@ -82,7 +82,7 @@
                         <ul>
                             @for (key : monthCategory.keySet())
                             {
-                            <li><a href="@url("/category/moth/")@key" title="@monthCategory.get(key)">@monthCategory.get(key)</a></li>
+                            <li><a href="@url("/category/month/")@key" title="@monthCategory.get(key)">@monthCategory.get(key)</a></li>
                             }
                         </ul>
                     </div>
@@ -132,8 +132,8 @@
                         <div class="f1">@article.getCreateDate().format("yyyy年M月d日")　分类：
                             @{
                                 List<Category> cats = new ArrayList<Category>();
-                                for(Category cat : article.getCategorys()){
-                                    if(cat.getType() == 0){
+                                for(Category cat : article.getCategories()){
+                                    if(cat.getType() == com.mvc.domain.DomainType.Category){
                                         cats.add(cat);
                                      }
                                 }

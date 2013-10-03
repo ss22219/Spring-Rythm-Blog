@@ -1,14 +1,14 @@
 package com.mvc.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
- * Date: 13-10-1
- * Time: 下午4:12
+ * Date: 13-10-3
+ * Time: 下午6:33
  * To change this template use File | Settings | File Templates.
  */
 @Entity
@@ -22,8 +22,10 @@ public class Article {
     private int browseCount;
     private int type;
     private int status;
+    private boolean deleted;
     private User user;
-    private List<Category> categorys;
+    private List<Category> categories;
+    private List<Comment> comments;
 
     @Column(name = "article_id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
@@ -55,7 +57,7 @@ public class Article {
         this.content = content;
     }
 
-    @Column(name = "create_date", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
+    @Column(name = "create_date", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
     public Date getCreateDate() {
         return createDate;
@@ -65,7 +67,7 @@ public class Article {
         this.createDate = createDate;
     }
 
-    @Column(name = "modify_date", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
+    @Column(name = "modify_date", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
     public Date getModifyDate() {
         return modifyDate;
@@ -115,6 +117,16 @@ public class Article {
         this.status = status;
     }
 
+    @Column(name = "deleted", nullable = false, insertable = true, updatable = true, length = 0, precision = 0)
+    @Basic
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -125,6 +137,7 @@ public class Article {
         if (articleId != article.articleId) return false;
         if (browseCount != article.browseCount) return false;
         if (commentCount != article.commentCount) return false;
+        if (deleted != article.deleted) return false;
         if (status != article.status) return false;
         if (type != article.type) return false;
         if (content != null ? !content.equals(article.content) : article.content != null) return false;
@@ -146,6 +159,7 @@ public class Article {
         result = 31 * result + browseCount;
         result = 31 * result + type;
         result = 31 * result + status;
+        result = 31 * result + (deleted ? 1 : 0);
         return result;
     }
 
@@ -161,11 +175,20 @@ public class Article {
 
     @JoinTable(name = "category_relation", catalog = "blog", schema = "", joinColumns = @JoinColumn(name = "article_id", referencedColumnName = "article_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false))
     @ManyToMany
-    public List<Category> getCategorys() {
-        return categorys;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategorys(List<Category> categorys) {
-        this.categorys = categorys;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    @OneToMany(mappedBy = "article")
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

@@ -38,7 +38,7 @@ public class CalendarTag extends JavaTagBase {
         };
         Date dateNow = new Date();
         ///构造表头
-        sb.append("<table id=\"wp-calendar\"><caption>" + (dateNow.getYear() + 1900) + " 年" + dateNow.getMonth() + "月" + "</caption><thead><tr>");
+        sb.append("<table id=\"wp-calendar\"><caption>" + (dateNow.getYear() + 1900) + " 年" + (dateNow.getMonth() + 1) + "月" + "</caption><thead><tr>");
 
         ///一个月中第几天
         int monthDay = 0;
@@ -66,7 +66,7 @@ public class CalendarTag extends JavaTagBase {
         Date endDay = calendar.getTime();
 
         ///本月文章列表
-        Page<Article> articles = articleService.getArticleByMonth(startDay, 1);
+        Page<Article> articles = articleService.getArticleByMonth(startDay.getYear() + 1900, startDay.getMonth() + 1, 1);
         monthDay = 0;
         weekDay = 0;
 

@@ -32,14 +32,20 @@ public class ArticleService {
         return articleRepository.getArticle(id);
     }
 
-    public List<Article> getArticleByDay(Date day) {
-        return articleRepository.getArticleByDay(day, 1, 5);
+    public List<Article> getArticleByDay(int year, int month, int day) {
+        return articleRepository.getArticleByDay(year, month, day, 1, 5);
     }
 
-    public Page<Article> getArticleByMonth(Date month, int pageIndex) {
+    public Page<Article> getArticleByDay(int year, int month, int day, int pageIndex) {
         int pageSize = Integer.parseInt(settingService.getSetting("articlePageSize"));
-        List<Article> list = articleRepository.getArticleByMonth(month, pageIndex, pageSize);
-        return new Page<Article>(list, pageIndex, pageSize, articleRepository.getMonthArticleCount(month), 4);
+        List<Article> list = articleRepository.getArticleByDay(year, month, day, 1, 5);
+        return new Page<Article>(list, pageIndex, pageSize, articleRepository.getDayArticleCount(year, month, day), 5);
+    }
+
+    public Page<Article> getArticleByMonth(int year, int month, int pageIndex) {
+        int pageSize = Integer.parseInt(settingService.getSetting("articlePageSize"));
+        List<Article> list = articleRepository.getArticleByMonth(year, month, pageIndex, pageSize);
+        return new Page<Article>(list, pageIndex, pageSize, articleRepository.getMonthArticleCount(year, month), 5);
     }
 
 }
