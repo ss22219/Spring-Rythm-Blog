@@ -1,0 +1,78 @@
+@import com.mvc.model.*, com.mvc.util.*,com.mvc.domain.*;
+@args(){
+    String title,
+    String blogTitle,
+    String webSite,
+    String title,
+    String blogDescription,
+    List<Category> categories,
+    List<Comment> lastComment,
+    List<Article> lastArticle,
+    boolean isAdmin,
+    String allRegister,
+    Map<String,String> monthCategory,
+    boolean isLogin,
+    Page<Article> articles
+}
+@extends(content.layout,title: title,blogTitle: blogTitle,blogDescription: blogDescription,webSite: webSite,lastComment: lastComment,lastArticle: lastArticle,allRegister: allRegister,categories: categories,monthCategory: monthCategory,isLogin: isLogin,isAdmin: isAdmin)
+@if (articles.getList().size() == 0)
+{
+<h2>抱歉，没有找到任何内容。</h2>
+}
+else
+{
+    @for (Article article : articles.getList())
+    {
+    <div class="k1">
+        <h3>
+            <a href="@url("/article/")@article.getArticleId()">@article.getTitle()</a>
+            <b>Browse:@article.getBrowseCount() </b>
+        </h3>
+        <div class="k1_1">
+        </div>
+        <p>@html2string(article.getContent())</p>
+        <div class="k1_2">
+            <div class="m1">时间：@article.getCreateDate().format("yyyy-MM-dd")</div>
+            <div class="m2">
+                @{
+                    List<Category> list = new ArrayList<Category>();
+                    List<Category> list2 = new ArrayList<Category>();
+                    for(Category category : article.getCategories()){
+                        if(category.getType() == DomainType.Category){
+                            list.add(category);
+                        }else{
+                            list2.add(category);
+                        }
+                    }
+                }
+                @if (list.size() > 0)
+                {
+                    分类：
+                    @for (int i=0;i<list.size();i++)
+                    {
+                        @{Category category = list.get(i);}
+                        <a href="@url("/category/cat/")@category.getCategoryId()" title="查看@category.getName()中的全部文章">@category.getName()</a>
+                        @if (i + 1 < list.size()){,}
+                    }
+                }
+            </div>
+            <div class="m3">
+                @if (list2.size() > 0)
+                {
+                    标签：
+                    @for (int i = 0; i < list2.size(); i++)
+                    {
+                        @{Category category = list2.get(i);}
+
+                        <a href="@url("/category/tag/")@category.getName()" title="查看@category.getName()中的全部文章">@category.getName()</a>
+                        @if (i + 1 < list.size()){,}
+                    }
+                }
+            </div>
+            <div class="m4">评论：@article.getCommentCount()</div>
+        </div>
+    </div>
+    }
+}
+<div class="page">
+</div>

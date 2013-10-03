@@ -1,0 +1,50 @@
+<div id="header_010" xmlns="http://www.w3.org/1999/html">
+    <div class="ss001">
+        <div class="ss002">Search</div>
+        <form action="@url("/search/")" id="searchform1" method="get">
+        <input type="text" id="s" name="s" value="" />
+        <input type="submit" value="" id="searchsubmit" onclick="window.location.href = '@url("/search/")' + $('#s').val(); return false;" />
+        </form>
+    </div>
+    <div class="a1">
+        <div class="a1_1">
+            <a href="#" target="_blank">
+                <img src="@url("/Content/themes/BlueSpace/images/xb_001.png")" /></a>
+        </div>
+        <div class="a1_1">
+            <a href="#" target="_blank">
+                <img src="@url("/Content/themes/BlueSpace/images/xb_002.png")" /></a>
+        </div>
+        <div class="a1_1">
+            <a href="#" target="_blank">
+                <img src="@url("/Content/themes/BlueSpace/images/xb_003.png")" /></a>
+        </div>
+    </div>
+    <div class="a2">
+        <a href="@url("/")">
+        <img src="@url("/Content/themes/BlueSpace/images/xct-001.jpg")" /></a>
+    </div>
+</div>
+<div class="g1">
+    <div class="g1_1">
+        @blogDescription
+    </div>
+    <div class="g1_2">
+        <a href="@url("/")">@webSite</a>
+    </div>
+</div>
+<div class="g2">
+    <div class="g2_1">
+        <img src="@url("/Content/themes/BlueSpace/images/logo.jpg")" />
+    </div>
+    <div class="g2_2">
+        <img src="@url("/Content/themes/BlueSpace/images/dhb_1.jpg")" />
+    </div>
+    <div id="navigation">
+        <div class="menu">
+            <ul>
+                <li class="page_item page-item-2"><a href="@url("/")">首页</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
