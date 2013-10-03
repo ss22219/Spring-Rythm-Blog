@@ -1,7 +1,6 @@
 package com.mvc.model;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.List;
 
 /**
