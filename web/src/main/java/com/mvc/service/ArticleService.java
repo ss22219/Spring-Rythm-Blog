@@ -1,5 +1,6 @@
 package com.mvc.service;
 
+import com.mvc.exception.ServiceException;
 import com.mvc.model.Article;
 import com.mvc.repository.ArticleRepository;
 import com.mvc.util.Page;
@@ -28,12 +29,11 @@ public class ArticleService {
         return articleRepository.getLastArticles(lastArticleCount);
     }
 
-    public Article getArticle(int id) {
-        return articleRepository.getArticle(id);
-    }
-
-    public List<Article> getArticleByDay(int year, int month, int day) {
-        return articleRepository.getArticleByDay(year, month, day, 1, 5);
+    public Article getArticle(int id) throws ServiceException {
+        Article article = articleRepository.getArticle(id);
+        if (article == null)
+            throw new ServiceException("抱歉，你访问的地址貌似有问题？");
+        return article;
     }
 
     public Page<Article> getArticleByDay(int year, int month, int day, int pageIndex) {

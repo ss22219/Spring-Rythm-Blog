@@ -3,8 +3,8 @@ package com.mvc.controller;
 import com.mvc.exception.ServiceException;
 import com.mvc.model.User;
 import com.mvc.service.UserService;
-import com.mvc.viewmodel.Login;
-import com.mvc.viewmodel.Register;
+import com.mvc.formmodel.Login;
+import com.mvc.formmodel.Register;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

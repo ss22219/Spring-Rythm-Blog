@@ -1,4 +1,4 @@
-package com.mvc.viewmodel;
+package com.mvc.formmodel;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;

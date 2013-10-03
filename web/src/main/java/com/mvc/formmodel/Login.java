@@ -1,7 +1,5 @@
-package com.mvc.viewmodel;
+package com.mvc.formmodel;
 
-
-import org.hibernate.validator.constraints.*;
 
 import javax.validation.constraints.Size;
 

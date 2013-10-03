@@ -1,7 +1,7 @@
 package com.mvc.model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 public class Comment {
@@ -12,7 +12,7 @@ public class Comment {
     private Date createDate;
     private String userName;
     private String userEmail;
-    private int userIp;
+    private String userIp;
     private User user;
     private Article article;
     private int articleId;
@@ -27,7 +27,7 @@ public class Comment {
         this.commentId = commentId;
     }
 
-    @Column(name = "parent_id", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "parent_id", nullable = true, insertable = false, updatable = false, length = 10, precision = 0)
     @Basic
     public Integer getParentId() {
         return parentId;
@@ -48,8 +48,8 @@ public class Comment {
     }
 
     @Column(name = "status", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-         @Basic
-         public int getStatus() {
+    @Basic
+    public int getStatus() {
         return status;
     }
 
@@ -66,7 +66,7 @@ public class Comment {
     public void setArticleId(int status) {
         this.articleId = status;
     }
-    
+
     @Column(name = "create_date", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
     public Date getCreateDate() {
@@ -97,13 +97,13 @@ public class Comment {
         this.userEmail = userEmail;
     }
 
-    @Column(name = "user_ip", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "user_ip", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
     @Basic
-    public int getUserIp() {
+    public String getUserIp() {
         return userIp;
     }
 
-    public void setUserIp(int userIp) {
+    public void setUserIp(String userIp) {
         this.userIp = userIp;
     }
 
@@ -135,7 +135,7 @@ public class Comment {
         result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
         result = 31 * result + (userName != null ? userName.hashCode() : 0);
         result = 31 * result + (userEmail != null ? userEmail.hashCode() : 0);
-        result = 31 * result + userIp;
+        result = 31 * result + (userIp != null ? userIp.hashCode() : 0);
         return result;
     }
 
@@ -169,5 +169,17 @@ public class Comment {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    private Comment parent;
+
+    @ManyToOne
+    @JoinColumn(name = "parent_id", referencedColumnName = "comment_id", nullable = true,insertable = true,updatable = true)
+    public Comment getParent() {
+        return parent;
+    }
+
+    public void setParent(Comment parent) {
+        this.parent = parent;
     }
 }
