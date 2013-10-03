@@ -6,13 +6,6 @@ import org.rythmengine.template.JavaTagBase;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 13-10-3
- * Time: 下午9:07
- * To change this template use File | Settings | File Templates.
- */
 public class Html2StringTag extends JavaTagBase {
     @Override
     protected void call(__ParameterList parameters, __Body body) {

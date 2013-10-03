@@ -1,15 +1,9 @@
 package com.mvc.model;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 13-10-3
- * Time: 下午6:33
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 public class Article {
     private int articleId;

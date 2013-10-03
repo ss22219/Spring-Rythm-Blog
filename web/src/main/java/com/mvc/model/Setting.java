@@ -4,13 +4,6 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 13-10-1
- * Time: 下午4:12
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 public class Setting {
     private String key;

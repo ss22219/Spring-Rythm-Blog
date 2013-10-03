@@ -3,13 +3,6 @@ package com.mvc.model;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 13-10-1
- * Time: 下午4:12
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 public class User {
     private int userId;
