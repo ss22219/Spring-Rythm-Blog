@@ -66,15 +66,15 @@ public class CommentService {
         if (!settingService.getSetting("closeComment").equals("0")) {
 
             if (user != null || settingService.getSetting("notLoginComment").equals("1")) {
-                Article article = articleService.getArticle(comment.getArticleId());
+                Article article = articleService.getArticle(comment.getArticle().getArticleId());
 
                 if (article.getStatus() == DomainType.ArticleStatusOpen || (user != null && user.getRole() == DomainType.Admin)) {
                     Comment parent = null;
 
-                    if (comment.getParentId() != 0) {
+                    if (comment.getParent() != null) {
 
-                        parent = getComment(comment.getParentId());
-                        if (!parent.isDeleted() && parent.getArticleId() == comment.getArticleId() && (parent.getStatus() == DomainType.CommentStatusOpen || (user != null && (user.getRole() == DomainType.Admin || parent.getUser() != null && parent.getUser().getUserId() == user.getUserId())))) {
+                        parent = getComment(comment.getParent().getCommentId());
+                        if (!parent.isDeleted() && parent.getArticle().getArticleId() == comment.getArticle().getArticleId() && (parent.getStatus() == DomainType.CommentStatusOpen || (user != null && (user.getRole() == DomainType.Admin || parent.getUser() != null && parent.getUser().getUserId() == user.getUserId())))) {
                             comment.setParent(parent);
 
                         } else {

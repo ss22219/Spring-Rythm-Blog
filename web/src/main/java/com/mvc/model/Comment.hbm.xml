@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.mvc.model.Comment" table="comment" schema="" catalog="blog">
+        <id name="commentId">
+            <column name="comment_id" sql-type="int" length="10" not-null="true"/>
+        </id>
+        <property name="articleId">
+            <column name="article_id" sql-type="int" length="10" not-null="true"/>
+        </property>
+        <property name="parentId">
+            <column name="parent_id" sql-type="int" length="10"/>
+        </property>
+        <property name="deleted">
+            <column name="deleted" sql-type="bit" not-null="true"/>
+        </property>
+        <property name="status">
+            <column name="status" sql-type="int" length="10" not-null="true"/>
+        </property>
+        <property name="createDate">
+            <column name="create_date" sql-type="date" length="10" not-null="true"/>
+        </property>
+        <property name="userName">
+            <column name="user_name" sql-type="varchar" not-null="true"/>
+        </property>
+        <property name="userEmail">
+            <column name="user_email" sql-type="varchar" not-null="true"/>
+        </property>
+        <property name="userIp">
+            <column name="user_ip" sql-type="int" length="10" not-null="true"/>
+        </property>
+        <property name="userId">
+            <column name="user_id" sql-type="int" length="10" not-null="true"/>
+        </property>
+        <property name="content">
+            <column name="content" sql-type="text" length="65535" not-null="true"/>
+        </property>
+        <many-to-one name="article" class="com.mvc.model.Article">
+            <column name="article_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="user" class="com.mvc.model.User">
+            <column name="user_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="parent" class="com.mvc.model.Comment" not-null="true">
+            <column name="parent_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

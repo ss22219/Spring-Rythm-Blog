@@ -1,9 +1,15 @@
 package com.mvc.model;
 
-import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
-@Entity
+/**
+ * Created with IntelliJ IDEA.
+ * User: Administrator
+ * Date: 13-10-4
+ * Time: 上午7:26
+ * To change this template use File | Settings | File Templates.
+ */
 public class User {
     private int userId;
     private String userName;
@@ -14,9 +20,9 @@ public class User {
     private int status;
     private String email;
     private int role;
+    private List<Comment> comments;
+    private List<Article> articles;
 
-    @Column(name = "user_id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    @Id
     public int getUserId() {
         return userId;
     }
@@ -25,8 +31,6 @@ public class User {
         this.userId = userId;
     }
 
-    @Column(name = "user_name", nullable = false, insertable = true, updatable = true, length = 50, precision = 0)
-    @Basic
     public String getUserName() {
         return userName;
     }
@@ -35,8 +39,6 @@ public class User {
         this.userName = userName;
     }
 
-    @Column(name = "nice_name", nullable = false, insertable = true, updatable = true, length = 50, precision = 0)
-    @Basic
     public String getNiceName() {
         return niceName;
     }
@@ -45,8 +47,6 @@ public class User {
         this.niceName = niceName;
     }
 
-    @Column(name = "password", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
-    @Basic
     public String getPassword() {
         return password;
     }
@@ -55,8 +55,6 @@ public class User {
         this.password = password;
     }
 
-    @Column(name = "picture", nullable = true, insertable = true, updatable = true, length = 255, precision = 0)
-    @Basic
     public String getPicture() {
         return picture;
     }
@@ -65,8 +63,6 @@ public class User {
         this.picture = picture;
     }
 
-    @Column(name = "register_date", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
-    @Basic
     public Date getRegisterDate() {
         return registerDate;
     }
@@ -75,8 +71,6 @@ public class User {
         this.registerDate = registerDate;
     }
 
-    @Column(name = "status", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    @Basic
     public int getStatus() {
         return status;
     }
@@ -85,8 +79,6 @@ public class User {
         this.status = status;
     }
 
-    @Column(name = "email", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
-    @Basic
     public String getEmail() {
         return email;
     }
@@ -95,8 +87,6 @@ public class User {
         this.email = email;
     }
 
-    @Column(name = "role", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    @Basic
     public int getRole() {
         return role;
     }
@@ -137,5 +127,21 @@ public class User {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + role;
         return result;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
     }
 }

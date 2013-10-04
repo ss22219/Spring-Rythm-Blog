@@ -1,10 +1,15 @@
 package com.mvc.model;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Entity
+/**
+ * Created with IntelliJ IDEA.
+ * User: Administrator
+ * Date: 13-10-4
+ * Time: 上午7:26
+ * To change this template use File | Settings | File Templates.
+ */
 public class Article {
     private int articleId;
     private String title;
@@ -16,12 +21,11 @@ public class Article {
     private int type;
     private int status;
     private boolean deleted;
-    private User user;
+    private int userId;
     private List<Category> categories;
     private List<Comment> comments;
+    private User user;
 
-    @Column(name = "article_id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    @Id
     public int getArticleId() {
         return articleId;
     }
@@ -30,8 +34,6 @@ public class Article {
         this.articleId = articleId;
     }
 
-    @Column(name = "title", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
-    @Basic
     public String getTitle() {
         return title;
     }
@@ -40,8 +42,6 @@ public class Article {
         this.title = title;
     }
 
-    @Column(name = "content", nullable = false, insertable = true, updatable = true, length = 65535, precision = 0)
-    @Basic
     public String getContent() {
         return content;
     }
@@ -50,8 +50,6 @@ public class Article {
         this.content = content;
     }
 
-    @Column(name = "create_date", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    @Basic
     public Date getCreateDate() {
         return createDate;
     }
@@ -60,8 +58,6 @@ public class Article {
         this.createDate = createDate;
     }
 
-    @Column(name = "modify_date", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    @Basic
     public Date getModifyDate() {
         return modifyDate;
     }
@@ -70,8 +66,6 @@ public class Article {
         this.modifyDate = modifyDate;
     }
 
-    @Column(name = "comment_count", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    @Basic
     public int getCommentCount() {
         return commentCount;
     }
@@ -80,8 +74,6 @@ public class Article {
         this.commentCount = commentCount;
     }
 
-    @Column(name = "browse_count", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    @Basic
     public int getBrowseCount() {
         return browseCount;
     }
@@ -90,8 +82,6 @@ public class Article {
         this.browseCount = browseCount;
     }
 
-    @Column(name = "type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    @Basic
     public int getType() {
         return type;
     }
@@ -100,8 +90,6 @@ public class Article {
         this.type = type;
     }
 
-    @Column(name = "status", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    @Basic
     public int getStatus() {
         return status;
     }
@@ -110,14 +98,20 @@ public class Article {
         this.status = status;
     }
 
-    @Column(name = "deleted", nullable = false, insertable = true, updatable = true, length = 0, precision = 0)
-    @Basic
     public boolean isDeleted() {
         return deleted;
     }
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -133,6 +127,7 @@ public class Article {
         if (deleted != article.deleted) return false;
         if (status != article.status) return false;
         if (type != article.type) return false;
+        if (userId != article.userId) return false;
         if (content != null ? !content.equals(article.content) : article.content != null) return false;
         if (createDate != null ? !createDate.equals(article.createDate) : article.createDate != null) return false;
         if (modifyDate != null ? !modifyDate.equals(article.modifyDate) : article.modifyDate != null) return false;
@@ -153,21 +148,10 @@ public class Article {
         result = 31 * result + type;
         result = 31 * result + status;
         result = 31 * result + (deleted ? 1 : 0);
+        result = 31 * result + userId;
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    @JoinTable(name = "category_relation", catalog = "blog", schema = "", joinColumns = @JoinColumn(name = "article_id", referencedColumnName = "article_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false))
-    @ManyToMany
     public List<Category> getCategories() {
         return categories;
     }
@@ -176,12 +160,19 @@ public class Article {
         this.categories = categories;
     }
 
-    @OneToMany(mappedBy = "article")
     public List<Comment> getComments() {
         return comments;
     }
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

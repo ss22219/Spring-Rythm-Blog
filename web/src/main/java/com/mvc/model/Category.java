@@ -1,9 +1,14 @@
 package com.mvc.model;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
+/**
+ * Created with IntelliJ IDEA.
+ * User: Administrator
+ * Date: 13-10-4
+ * Time: 上午7:26
+ * To change this template use File | Settings | File Templates.
+ */
 public class Category {
     private int categoryId;
     private String name;
@@ -13,8 +18,6 @@ public class Category {
     private List<Category> children;
     private List<Article> articles;
 
-    @Column(name = "category_id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    @Id
     public int getCategoryId() {
         return categoryId;
     }
@@ -23,8 +26,6 @@ public class Category {
         this.categoryId = categoryId;
     }
 
-    @Column(name = "name", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
-    @Basic
     public String getName() {
         return name;
     }
@@ -33,8 +34,6 @@ public class Category {
         this.name = name;
     }
 
-    @Column(name = "type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    @Basic
     public int getType() {
         return type;
     }
@@ -43,8 +42,6 @@ public class Category {
         this.type = type;
     }
 
-    @Column(name = "article_count", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    @Basic
     public int getArticleCount() {
         return articleCount;
     }
@@ -77,8 +74,6 @@ public class Category {
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "parent_id", referencedColumnName = "category_id")
     public Category getParent() {
         return parent;
     }
@@ -87,7 +82,6 @@ public class Category {
         this.parent = parent;
     }
 
-    @OneToMany(mappedBy = "parent")
     public List<Category> getChildren() {
         return children;
     }
@@ -96,7 +90,6 @@ public class Category {
         this.children = children;
     }
 
-    @ManyToMany(mappedBy = "categories")
     public List<Article> getArticles() {
         return articles;
     }

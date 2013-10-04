@@ -26,7 +26,7 @@ public class CommentRepository extends BaseRepository<Comment> {
 
     public int getCommentLaterCount(int commentId) {
         Comment comment = getComment(commentId);
-        List list = getSession().createQuery("select count(commentId) from Comment where articleId=" + comment.getArticleId() + " and createDate>=?").setParameter(0, comment.getCreateDate()).list();
+        List list = getSession().createQuery("select count(commentId) from Comment where articleId=" + comment.getArticle().getArticleId() + " and createDate>=?").setParameter(0, comment.getCreateDate()).list();
         return list.size() > 0 ? (Integer) list.get(0) : 0;
     }
 }
