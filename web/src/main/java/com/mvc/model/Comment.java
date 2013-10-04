@@ -6,7 +6,6 @@ import java.util.Date;
 @Entity
 public class Comment {
     private int commentId;
-    private Integer parentId;
     private boolean deleted;
     private int status;
     private Date createDate;
@@ -15,7 +14,6 @@ public class Comment {
     private String userIp;
     private User user;
     private Article article;
-    private int articleId;
 
     @Column(name = "comment_id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
@@ -25,16 +23,6 @@ public class Comment {
 
     public void setCommentId(int commentId) {
         this.commentId = commentId;
-    }
-
-    @Column(name = "parent_id", nullable = true, insertable = false, updatable = false, length = 10, precision = 0)
-    @Basic
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
     }
 
     @Column(name = "deleted", nullable = false, insertable = true, updatable = true, length = 0, precision = 0)
@@ -55,16 +43,6 @@ public class Comment {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    @Column(name = "article_id", nullable = false, insertable = false, updatable = false, length = 10, precision = 0)
-    @Basic
-    public int getArticleId() {
-        return articleId;
-    }
-
-    public void setArticleId(int status) {
-        this.articleId = status;
     }
 
     @Column(name = "create_date", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
@@ -119,7 +97,6 @@ public class Comment {
         if (status != comment.status) return false;
         if (userIp != comment.userIp) return false;
         if (createDate != null ? !createDate.equals(comment.createDate) : comment.createDate != null) return false;
-        if (parentId != null ? !parentId.equals(comment.parentId) : comment.parentId != null) return false;
         if (userEmail != null ? !userEmail.equals(comment.userEmail) : comment.userEmail != null) return false;
         if (userName != null ? !userName.equals(comment.userName) : comment.userName != null) return false;
 
@@ -129,7 +106,6 @@ public class Comment {
     @Override
     public int hashCode() {
         int result = commentId;
-        result = 31 * result + (parentId != null ? parentId.hashCode() : 0);
         result = 31 * result + (deleted ? 1 : 0);
         result = 31 * result + status;
         result = 31 * result + (createDate != null ? createDate.hashCode() : 0);

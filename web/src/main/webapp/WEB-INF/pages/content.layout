@@ -25,14 +25,6 @@
     <script type="text/javascript">
         DD_belatedPNG.fix('div, ul, img, li, input , a , textarea , ol , p , span , h1 , h2 , h3 , h4 , h5');
     </script>
-
-    <style type="text/css">
-        .recentcomments a {
-            display: inline !important;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-    </style>
     <style type="text/css">
         .recentcomments a {
             display: inline !important;

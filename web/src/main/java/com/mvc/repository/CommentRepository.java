@@ -13,11 +13,11 @@ public class CommentRepository extends BaseRepository<Comment> {
     }
 
     public List<Comment> getArticleParentComment(int articleId, int pageIndex, int pageSize) {
-        return getSession().createQuery("from Comment where deleted=false and status=1 and articleId=" + articleId + " order by createDate").setFirstResult((pageIndex - 1) * pageSize).setMaxResults(pageSize).list();
+        return getSession().createQuery("from Comment where deleted=false and status=1 and article=" + articleId + " order by createDate").setFirstResult((pageIndex - 1) * pageSize).setMaxResults(pageSize).list();
     }
 
     public int getArticleParentCommentCount(int articleId) {
-        return getSession().createQuery("from Comment where deleted=false and status=1 and articleId=" + articleId).list().size();
+        return getSession().createQuery("from Comment where deleted=false and status=1 and article=" + articleId).list().size();
     }
 
     public Comment getComment(int id) {
@@ -26,7 +26,7 @@ public class CommentRepository extends BaseRepository<Comment> {
 
     public int getCommentLaterCount(int commentId) {
         Comment comment = getComment(commentId);
-        List list = getSession().createQuery("select count(commentId) from Comment where articleId=" + comment.getArticleId() + " and createDate>=?").setParameter(0, comment.getCreateDate()).list();
-        return list.size() > 0 ? (Integer) list.get(0) : 0;
+        List list = getSession().createQuery("select count(commentId) from Comment where article=" + comment.getArticle().getArticleId() + " and createDate>=?").setParameter(0, comment.getCreateDate()).list();
+        return list.size() > 0 ? Integer.parseInt(list.get(0).toString()) : 0;
     }
 }

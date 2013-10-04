@@ -48,4 +48,15 @@ public class ArticleService {
         return new Page<Article>(list, pageIndex, pageSize, articleRepository.getMonthArticleCount(year, month), 5);
     }
 
+    public void addBrowseCount(int articleId) throws ServiceException {
+        Article article = getArticle(articleId);
+        article.setBrowseCount(article.getBrowseCount() + 1);
+        articleRepository.save(article);
+    }
+
+    public void addCommentCount(int articleId) throws ServiceException {
+        Article article = getArticle(articleId);
+        article.setCommentCount(article.getCommentCount() + 1);
+        articleRepository.save(article);
+    }
 }

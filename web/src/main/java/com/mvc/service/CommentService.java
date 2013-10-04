@@ -55,7 +55,7 @@ public class CommentService {
                 break;
         }
         int laterCount = commentRepository.getCommentLaterCount(commentId);
-        int pageSize = Integer.parseInt(settingService.getSetting("CommentPageSize"));
+        int pageSize = Integer.parseInt(settingService.getSetting("commentPageSize"));
 
         return (int) Math.ceil(laterCount / (double) pageSize);
     }
@@ -66,15 +66,15 @@ public class CommentService {
         if (!settingService.getSetting("closeComment").equals("0")) {
 
             if (user != null || settingService.getSetting("notLoginComment").equals("1")) {
-                Article article = articleService.getArticle(comment.getArticleId());
+                Article article = articleService.getArticle(comment.getArticle().getArticleId());
 
                 if (article.getStatus() == DomainType.ArticleStatusOpen || (user != null && user.getRole() == DomainType.Admin)) {
                     Comment parent = null;
 
-                    if (comment.getParentId() != 0) {
+                    if (comment.getParent() != null && comment.getParent().getCommentId() != 0) {
 
-                        parent = getComment(comment.getParentId());
-                        if (!parent.isDeleted() && parent.getArticleId() == comment.getArticleId() && (parent.getStatus() == DomainType.CommentStatusOpen || (user != null && (user.getRole() == DomainType.Admin || parent.getUser() != null && parent.getUser().getUserId() == user.getUserId())))) {
+                        parent = getComment(comment.getParent().getCommentId());
+                        if (!parent.isDeleted() && parent.getArticle().getArticleId() == comment.getArticle().getArticleId() && (parent.getStatus() == DomainType.CommentStatusOpen || (user != null && (user.getRole() == DomainType.Admin || parent.getUser() != null && parent.getUser().getUserId() == user.getUserId())))) {
                             comment.setParent(parent);
 
                         } else {
@@ -100,6 +100,7 @@ public class CommentService {
                     comment.setDeleted(false);
 
                     commentRepository.save(comment);
+                    articleService.addCommentCount(article.getArticleId());
                 } else {
                     throw new ServiceException("抱歉，你没有权限评论该文章。");
                 }

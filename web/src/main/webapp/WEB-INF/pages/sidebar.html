@@ -26,7 +26,7 @@
                 @for (Article item : lastArticle)
                 {
                 <li>
-                    <a href="@url("/article/")@item.getTitle()" id="item.getArticleId()">@item.getTitle()</a>
+                    <a href="@url("/article/")@item.getArticleId()" id="item.getArticleId()">@item.getTitle()</a>
                 </li>
                 }
             </ul>
@@ -36,7 +36,7 @@
             <ul id="recentcomments">
                 @for (Comment comment : lastComment)
                 {
-                <li class="recentcomments">@comment.getUserName() 发表在《<a href="@url("/article/")@comment.getArticleId()-@comment.getCommentId()#comment-@comment.getCommentId()" title="@comment.getArticle().getTitle()">@comment.getArticle().getTitle()</a>》</li>
+                <li class="recentcomments">@comment.getUserName() 发表在《<a href="@url("/article/")@comment.getArticle().getArticleId()/comment/@comment.getCommentId()#comment-@comment.getCommentId()" title="@comment.getArticle().getTitle()">@comment.getArticle().getTitle()</a>》</li>
                 }
             </ul>
         </div>
@@ -98,7 +98,7 @@
                         <img alt='' src='@picture(comment.getUser().getPicture())' class='avatar avatar-31 photo avatar-default' height='31' width='31' />
                     </div>
                     <div class='clly_2'>@(comment.getUser() == null ? comment.getUserName() : comment.getUser().getNiceName())说道：</div>
-                    <div class='clly_3'><a href="@url("/article/")@comment.getArticle().getArticleId()-@comment.getCommentId()#comment-@comment.getCommentId()" title="@comment.getArticle().getTitle() 上的评论">@subString(comment.getContent(), 15, "")</a></div>
+                    <div class='clly_3'><a href="@url("/article/")@comment.getArticle().getArticleId()/comment/@comment.getCommentId()#comment-@comment.getCommentId()" title="@comment.getArticle().getTitle() 上的评论">@subString(comment.getContent(), 15, "")</a></div>
                 </li>
                 }
             </ul>
