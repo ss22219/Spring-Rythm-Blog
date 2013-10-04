@@ -1,6 +1,3 @@
-Spring-Rythm-Blog
+Spring-Rythm-Blog duapp
 =================
-
-a spring mvc blog
-
-this application is developing...
+use hibernate3.5 and spring3.1.0
