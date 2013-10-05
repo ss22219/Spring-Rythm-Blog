@@ -4,13 +4,6 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 13-10-5
- * Time: 上午7:56
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 public class Setting {
     private String key;
@@ -24,7 +17,6 @@ public class Setting {
     public void setKey(String key) {
         this.key = key;
     }
-
     private String value;
 
     @javax.persistence.Column(name = "value", nullable = false, insertable = true, updatable = true, length = 65535, precision = 0)

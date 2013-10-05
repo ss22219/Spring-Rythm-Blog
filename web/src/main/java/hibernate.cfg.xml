@@ -10,7 +10,6 @@
         <property name="connection.password"></property>
         <mapping class="com.mvc.model.Article"/>
         <mapping class="com.mvc.model.Category"/>
-        <mapping class="com.mvc.model.CategoryRelation"/>
         <mapping class="com.mvc.model.Comment"/>
         <mapping class="com.mvc.model.Setting"/>
         <mapping class="com.mvc.model.User"/>

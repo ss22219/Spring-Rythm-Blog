@@ -43,6 +43,7 @@
         <property name="username" value="root"/>
         <property name="password" value=""/>
     </bean>
+
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="hibernateProperties">
@@ -54,7 +55,6 @@
             <list>
                 <value>com.mvc.model.Article</value>
                 <value>com.mvc.model.Category</value>
-                <value>com.mvc.model.CategoryRelation</value>
                 <value>com.mvc.model.Comment</value>
                 <value>com.mvc.model.Setting</value>
                 <value>com.mvc.model.User</value>
