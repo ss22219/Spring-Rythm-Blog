@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "article")
 public class Article {
     private int articleId;
     private String title;
