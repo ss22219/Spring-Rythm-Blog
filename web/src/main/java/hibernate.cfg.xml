@@ -8,11 +8,12 @@
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.username">root</property>
         <property name="connection.password"></property>
-        <mapping resource="com/mvc/model/Article.hbm.xml"/>
-        <mapping resource="com/mvc/model/Category.hbm.xml"/>
-        <mapping resource="com/mvc/model/Comment.hbm.xml"/>
-        <mapping resource="com/mvc/model/Setting.hbm.xml"/>
-        <mapping resource="com/mvc/model/User.hbm.xml"/>
+        <mapping class="com.mvc.model.Article"/>
+        <mapping class="com.mvc.model.Category"/>
+        <mapping class="com.mvc.model.CategoryRelation"/>
+        <mapping class="com.mvc.model.Comment"/>
+        <mapping class="com.mvc.model.Setting"/>
+        <mapping class="com.mvc.model.User"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

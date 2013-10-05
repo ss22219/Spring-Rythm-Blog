@@ -15,10 +15,6 @@
 
     <mvc:annotation-driven validator="validator"/>
 
-    <mvc:interceptors>
-        <bean class="com.mvc.interceptor.SettingLoadInterceptor"/>
-        <bean class="com.mvc.interceptor.SecurityInterceptor"/>
-    </mvc:interceptors>
 
     <mvc:resources mapping="/Scripts/**" location="/Scripts/"/>
     <mvc:resources mapping="/Content/**" location="/Content/"/>
@@ -30,14 +26,7 @@
     <bean id="rythmConfigurator" class="com.ctlok.springframework.web.servlet.view.rythm.RythmConfigurator">
         <property name="rootDirectory" value="/WEB-INF/pages/"/>
         <property name="mode" value="dev"/>
-        <property name="tags">
-            <list>
-                <bean class="com.mvc.util.SubStringTag"/>
-                <bean class="com.mvc.util.CalendarTag"/>
-                <bean class="com.mvc.util.PictureTag"/>
-                <bean class="com.mvc.util.Html2StringTag"/>
-            </list>
-        </property>
+
     </bean>
 
     <bean id="rythmViewResolver" class="com.ctlok.springframework.web.servlet.view.rythm.RythmViewResolver">
@@ -54,17 +43,21 @@
         <property name="username" value="root"/>
         <property name="password" value=""/>
     </bean>
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-
-        <property name="mappingLocations">
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+            </props>
+        </property>
+        <property name="annotatedClasses">
             <list>
-                <value>classpath:com/mvc/model/Setting.hbm.xml</value>
-                <value>classpath:com/mvc/model/Article.hbm.xml</value>
-                <value>classpath:com/mvc/model/Category.hbm.xml</value>
-                <value>classpath:com/mvc/model/Comment.hbm.xml</value>
-                <value>classpath:com/mvc/model/User.hbm.xml</value>
+                <value>com.mvc.model.Article</value>
+                <value>com.mvc.model.Category</value>
+                <value>com.mvc.model.CategoryRelation</value>
+                <value>com.mvc.model.Comment</value>
+                <value>com.mvc.model.Setting</value>
+                <value>com.mvc.model.User</value>
             </list>
         </property>
     </bean>

@@ -1,23 +1,22 @@
 package com.mvc.model;
 
-import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
- * Date: 13-10-4
- * Time: 上午7:26
+ * Date: 13-10-5
+ * Time: 上午7:56
  * To change this template use File | Settings | File Templates.
  */
+@Entity
 public class Category {
     private int categoryId;
-    private String name;
-    private int type;
-    private int articleCount;
-    private Category parent;
-    private List<Category> children;
-    private List<Article> articles;
 
+    @javax.persistence.Column(name = "category_id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Id
     public int getCategoryId() {
         return categoryId;
     }
@@ -26,6 +25,10 @@ public class Category {
         this.categoryId = categoryId;
     }
 
+    private String name;
+
+    @javax.persistence.Column(name = "name", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
+    @Basic
     public String getName() {
         return name;
     }
@@ -34,6 +37,10 @@ public class Category {
         this.name = name;
     }
 
+    private int type;
+
+    @javax.persistence.Column(name = "type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public int getType() {
         return type;
     }
@@ -42,6 +49,10 @@ public class Category {
         this.type = type;
     }
 
+    private int articleCount;
+
+    @javax.persistence.Column(name = "article_count", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public int getArticleCount() {
         return articleCount;
     }
@@ -72,29 +83,5 @@ public class Category {
         result = 31 * result + type;
         result = 31 * result + articleCount;
         return result;
-    }
-
-    public Category getParent() {
-        return parent;
-    }
-
-    public void setParent(Category parent) {
-        this.parent = parent;
-    }
-
-    public List<Category> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<Category> children) {
-        this.children = children;
-    }
-
-    public List<Article> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(List<Article> articles) {
-        this.articles = articles;
     }
 }

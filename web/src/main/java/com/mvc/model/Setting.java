@@ -1,16 +1,22 @@
 package com.mvc.model;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
- * Date: 13-10-4
- * Time: 上午7:23
+ * Date: 13-10-5
+ * Time: 上午7:56
  * To change this template use File | Settings | File Templates.
  */
+@Entity
 public class Setting {
     private String key;
-    private String value;
 
+    @javax.persistence.Column(name = "key", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
+    @Id
     public String getKey() {
         return key;
     }
@@ -19,6 +25,10 @@ public class Setting {
         this.key = key;
     }
 
+    private String value;
+
+    @javax.persistence.Column(name = "value", nullable = false, insertable = true, updatable = true, length = 65535, precision = 0)
+    @Basic
     public String getValue() {
         return value;
     }

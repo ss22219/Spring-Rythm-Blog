@@ -1,28 +1,22 @@
 package com.mvc.controller;
 
-import com.mvc.model.*;
-import com.mvc.service.*;
+import com.mvc.model.Setting;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
     @Autowired
-    private SettingService settingService;
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private ArticleService articleService;
+    SessionFactory sessionFactory;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(ModelMap modelMap) {
+    @RequestMapping("/")
+    public String hello(ModelMap map) {
+        Setting setting = (Setting) sessionFactory.openSession().createQuery("from Setting where key='blogTitle'").list().get(0);
+        map.addAttribute("title", setting.getValue());
         return "index";
     }
 }

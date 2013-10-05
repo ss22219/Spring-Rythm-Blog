@@ -1,29 +1,23 @@
 package com.mvc.model;
 
-import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.sql.Date;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
- * Date: 13-10-4
- * Time: 上午7:26
+ * Date: 13-10-5
+ * Time: 上午7:56
  * To change this template use File | Settings | File Templates.
  */
+@Entity
 public class Comment {
     private int commentId;
-    private int articleId;
-    private Integer parentId;
-    private boolean deleted;
-    private int status;
-    private Date createDate;
-    private String userName;
-    private String userEmail;
-    private String userIp;
-    private int userId;
-    private String content;
-    private Article article;
-    private User user;
 
+    @javax.persistence.Column(name = "comment_id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Id
     public int getCommentId() {
         return commentId;
     }
@@ -32,6 +26,10 @@ public class Comment {
         this.commentId = commentId;
     }
 
+    private int articleId;
+
+    @javax.persistence.Column(name = "article_id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public int getArticleId() {
         return articleId;
     }
@@ -40,6 +38,10 @@ public class Comment {
         this.articleId = articleId;
     }
 
+    private Integer parentId;
+
+    @javax.persistence.Column(name = "parent_id", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public Integer getParentId() {
         return parentId;
     }
@@ -48,6 +50,10 @@ public class Comment {
         this.parentId = parentId;
     }
 
+    private boolean deleted;
+
+    @javax.persistence.Column(name = "deleted", nullable = false, insertable = true, updatable = true, length = 0, precision = 0)
+    @Basic
     public boolean isDeleted() {
         return deleted;
     }
@@ -56,6 +62,10 @@ public class Comment {
         this.deleted = deleted;
     }
 
+    private int status;
+
+    @javax.persistence.Column(name = "status", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public int getStatus() {
         return status;
     }
@@ -64,6 +74,10 @@ public class Comment {
         this.status = status;
     }
 
+    private Date createDate;
+
+    @javax.persistence.Column(name = "create_date", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public Date getCreateDate() {
         return createDate;
     }
@@ -72,6 +86,10 @@ public class Comment {
         this.createDate = createDate;
     }
 
+    private String userName;
+
+    @javax.persistence.Column(name = "user_name", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
+    @Basic
     public String getUserName() {
         return userName;
     }
@@ -80,6 +98,10 @@ public class Comment {
         this.userName = userName;
     }
 
+    private String userEmail;
+
+    @javax.persistence.Column(name = "user_email", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
+    @Basic
     public String getUserEmail() {
         return userEmail;
     }
@@ -88,14 +110,22 @@ public class Comment {
         this.userEmail = userEmail;
     }
 
-    public String getUserIp() {
+    private int userIp;
+
+    @javax.persistence.Column(name = "user_ip", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
+    public int getUserIp() {
         return userIp;
     }
 
-    public void setUserIp(String userIp) {
+    public void setUserIp(int userIp) {
         this.userIp = userIp;
     }
 
+    private int userId;
+
+    @javax.persistence.Column(name = "user_id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public int getUserId() {
         return userId;
     }
@@ -104,6 +134,10 @@ public class Comment {
         this.userId = userId;
     }
 
+    private String content;
+
+    @javax.persistence.Column(name = "content", nullable = false, insertable = true, updatable = true, length = 65535, precision = 0)
+    @Basic
     public String getContent() {
         return content;
     }
@@ -144,35 +178,9 @@ public class Comment {
         result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
         result = 31 * result + (userName != null ? userName.hashCode() : 0);
         result = 31 * result + (userEmail != null ? userEmail.hashCode() : 0);
-        result = 31 * result + (userIp != null ? userEmail.hashCode() : 0);
+        result = 31 * result + userIp;
         result = 31 * result + userId;
         result = 31 * result + (content != null ? content.hashCode() : 0);
         return result;
-    }
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    private Comment parent;
-
-    public Comment getParent() {
-        return parent;
-    }
-
-    public void setParent(Comment parent) {
-        this.parent = parent;
     }
 }

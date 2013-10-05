@@ -1,31 +1,23 @@
 package com.mvc.model;
 
-import java.util.Date;
-import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.sql.Date;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
- * Date: 13-10-4
- * Time: 上午7:26
+ * Date: 13-10-5
+ * Time: 上午7:56
  * To change this template use File | Settings | File Templates.
  */
+@Entity
 public class Article {
     private int articleId;
-    private String title;
-    private String content;
-    private Date createDate;
-    private Date modifyDate;
-    private int commentCount;
-    private int browseCount;
-    private int type;
-    private int status;
-    private boolean deleted;
-    private int userId;
-    private List<Category> categories;
-    private List<Comment> comments;
-    private User user;
 
+    @javax.persistence.Column(name = "article_id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Id
     public int getArticleId() {
         return articleId;
     }
@@ -34,6 +26,10 @@ public class Article {
         this.articleId = articleId;
     }
 
+    private String title;
+
+    @javax.persistence.Column(name = "title", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
+    @Basic
     public String getTitle() {
         return title;
     }
@@ -42,6 +38,10 @@ public class Article {
         this.title = title;
     }
 
+    private String content;
+
+    @javax.persistence.Column(name = "content", nullable = false, insertable = true, updatable = true, length = 65535, precision = 0)
+    @Basic
     public String getContent() {
         return content;
     }
@@ -50,6 +50,10 @@ public class Article {
         this.content = content;
     }
 
+    private Date createDate;
+
+    @javax.persistence.Column(name = "create_date", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public Date getCreateDate() {
         return createDate;
     }
@@ -58,6 +62,10 @@ public class Article {
         this.createDate = createDate;
     }
 
+    private Date modifyDate;
+
+    @javax.persistence.Column(name = "modify_date", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public Date getModifyDate() {
         return modifyDate;
     }
@@ -66,6 +74,10 @@ public class Article {
         this.modifyDate = modifyDate;
     }
 
+    private int commentCount;
+
+    @javax.persistence.Column(name = "comment_count", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public int getCommentCount() {
         return commentCount;
     }
@@ -74,6 +86,10 @@ public class Article {
         this.commentCount = commentCount;
     }
 
+    private int browseCount;
+
+    @javax.persistence.Column(name = "browse_count", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public int getBrowseCount() {
         return browseCount;
     }
@@ -82,6 +98,10 @@ public class Article {
         this.browseCount = browseCount;
     }
 
+    private int type;
+
+    @javax.persistence.Column(name = "type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public int getType() {
         return type;
     }
@@ -90,6 +110,10 @@ public class Article {
         this.type = type;
     }
 
+    private int status;
+
+    @javax.persistence.Column(name = "status", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public int getStatus() {
         return status;
     }
@@ -98,6 +122,10 @@ public class Article {
         this.status = status;
     }
 
+    private boolean deleted;
+
+    @javax.persistence.Column(name = "deleted", nullable = false, insertable = true, updatable = true, length = 0, precision = 0)
+    @Basic
     public boolean isDeleted() {
         return deleted;
     }
@@ -105,7 +133,10 @@ public class Article {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
+    private int userId;
 
+    @javax.persistence.Column(name = "user_id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public int getUserId() {
         return userId;
     }
@@ -150,29 +181,5 @@ public class Article {
         result = 31 * result + (deleted ? 1 : 0);
         result = 31 * result + userId;
         return result;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }
