@@ -3,7 +3,7 @@ Spring-Rythm-Blog
 
 a spring mvc blog
 
-this application is developing...
+this application is transplanted from .Net-MVC-Blog
 
 
 Master branch
