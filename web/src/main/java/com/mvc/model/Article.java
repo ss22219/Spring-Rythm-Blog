@@ -167,7 +167,7 @@ public class Article {
         this.user = user;
     }
 
-    @JoinTable(name = "category_relation", catalog = "blog", schema = "", joinColumns = @JoinColumn(name = "article_id", referencedColumnName = "article_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false))
+    @JoinTable(name = "category_relation", joinColumns = @JoinColumn(name = "article_id", referencedColumnName = "article_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false))
     @ManyToMany
     public List<Category> getCategories() {
         return categories;
