@@ -3,7 +3,7 @@ Spring-Rythm-Blog
 
 a spring mvc blog
 
-this application is transplanted from .Net-MVC-Blog
+this application is transplanted from <a href="https://github.com/ss22219/.Net-MVC-Blog">.Net-MVC-Blog</a>
 
 
 Master branch
