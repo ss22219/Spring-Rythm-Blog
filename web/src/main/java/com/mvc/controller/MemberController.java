@@ -51,7 +51,7 @@ public class MemberController {
             } else {
                 request.getSession().setAttribute("user", user);
                 if (returnUrl == null || returnUrl.length() == 0) {
-                    response.sendRedirect("/");
+                    response.sendRedirect("../");
                 } else {
                     response.sendRedirect(returnUrl);
                 }
@@ -85,7 +85,7 @@ public class MemberController {
             user.setPassword(register.getPassword());
             try {
                 userService.register(user);
-                response.sendRedirect("/member/login?message=" + URLEncoder.encode("注册成功。", "utf-8"));
+                response.sendRedirect("./login?message=" + URLEncoder.encode("注册成功。", "utf-8"));
             } catch (ServiceException e) {
                 errors.add(e.getMessage());
             }
@@ -114,6 +114,6 @@ public class MemberController {
     @RequestMapping(value = "/logOut")
     public void logOut(HttpServletResponse response, HttpServletRequest request) throws IOException {
         request.getSession().invalidate();
-        response.sendRedirect("/member/login?message=" + URLEncoder.encode("你已经成功退出登录。", "utf-8"));
+        response.sendRedirect("../login?message=" + URLEncoder.encode("你已经成功退出登录。", "utf-8"));
     }
 }

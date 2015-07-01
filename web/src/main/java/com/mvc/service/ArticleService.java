@@ -23,6 +23,18 @@ public class ArticleService {
         Page<Article> page = new Page<Article>(list, pageIndex, pageSize, articleRepository.getCategoryArticleCount(categoryId), 4);
         return page;
     }
+    public Page<Article> getArticleByTag(String tag, int pageIndex) {
+        int pageSize = Integer.parseInt(settingService.getSetting("articlePageSize"));
+        List<Article> list = articleRepository.getArticleByTag(tag, pageIndex, pageSize);
+        Page<Article> page = new Page<Article>(list, pageIndex, pageSize, articleRepository.getTagArticleCount(tag), 4);
+        return page;
+    }
+    public Page<Article> getArticleByName(String name, int pageIndex) {
+        int pageSize = Integer.parseInt(settingService.getSetting("articlePageSize"));
+        List<Article> list = articleRepository.getArticleByName(name, pageIndex, pageSize);
+        Page<Article> page = new Page<Article>(list, pageIndex, pageSize, articleRepository.getNameArticleCount(name), 4);
+        return page;
+    }
 
     public List<Article> getLastArticle() {
         int lastArticleCount = Integer.parseInt(settingService.getSetting("lastArticleCount"));

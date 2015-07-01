@@ -1,12 +1,10 @@
 package com.mvc.repository;
 
-import com.google.appengine.repackaged.org.joda.time.YearMonth;
 import com.mvc.domain.DomainType;
 import com.mvc.model.Article;
 import com.mvc.model.Category;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -52,5 +50,34 @@ public class ArticleRepository extends BaseRepository<Article> {
     public int getCategoryArticleCount(int categoryId) {
         List<Category> list = getSession().createQuery("from Category where categoryId=" + categoryId).list();
         return list.size() > 0 ? list.get(0).getArticleCount() : 0;
+    }
+    public List<Article> getArticleByTag(String tag, int pageIndex, int pageSize) {
+        List<Article> list = getSession().createQuery("select articles from Category as cat where cat.name=? and cat.type=1").setParameter(0, tag).setFirstResult((pageIndex - 1) * pageSize).setMaxResults(pageSize).list();
+        for (Article article : list) {
+            if (article.isDeleted() || article.getStatus() != DomainType.ArticleStatusOpen) {
+                list.remove(article);
+            }
+        }
+        return list;
+    }
+
+    public int getTagArticleCount(String tag) {
+        List<Category> list = getSession().createQuery("from Category where type=1 and name=?").setParameter(0, tag).list();
+        return list.size() > 0 ? list.get(0).getArticleCount() : 0;
+    }
+
+    public List<Article> getArticleByName(String name, int pageIndex, int pageSize) {
+        List<Article> list = getSession().createQuery("from Article where title like ? and deleted=false").setParameter(0, "%" + name + "%").setFirstResult((pageIndex - 1) * pageSize).setMaxResults(pageSize).list();
+        for (Article article : list) {
+            if (article.isDeleted() || article.getStatus() != DomainType.ArticleStatusOpen) {
+                list.remove(article);
+            }
+        }
+        return list;
+    }
+
+    public int getNameArticleCount(String name) {
+        List list = getSession().createSQLQuery("select count(*) from article where deleted=false and  title like ?").setParameter(0, "%" + name + "%").list();
+        return list.size() == 0 ? 0 : Integer.parseInt(list.get(0).toString());
     }
 }

@@ -6,7 +6,8 @@
     boolean isAdmin,
     String allRegister,
     Map<String,String> monthCategory,
-    boolean isLogin
+    boolean isLogin,
+    String search
 }
 <div class="g3_1">
     <link rel="stylesheet" href="@url("/Content/themes/BlueSpace/css/sidebar.css")" type="text/css" />
@@ -15,7 +16,7 @@
             <form action="@url("/search/")" id = "searchform2">
             <div>
                 <label for="s" class="screen-reader-text"></label>
-                <input type="text" id="s" name="s" value="" />
+                <input type="text" id="s" name="s" value="@search" />
                 <input type="submit" value="搜索" id="searchsubmit" onclick="window.location.href = '@url("/search/")' + $('#searchform2 #s').val(); return false;" />
             </div>
             </form>

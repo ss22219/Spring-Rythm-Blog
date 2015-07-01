@@ -40,7 +40,23 @@ public class CategoryController {
         return cat(categoryId, 1, map, response);
     }
 
-
+    @RequestMapping(value = "/tag/{tag}")
+    public String tag(@PathVariable String tag, ModelMap map, HttpServletResponse response) throws IOException {
+        return tag(tag, 1, map, response);
+    }
+    @RequestMapping(value = "/tag/{tag}/{page}")
+    public String tag(@PathVariable String tag, @PathVariable int page, ModelMap map, HttpServletResponse response) throws IOException {
+        page = page >= 1 ? page : 1;
+        Page<Article> articles = articleService.getArticleByTag(tag, page);
+        Category category = categoryService.getTag(tag);
+        if (category == null) {
+            response.sendError(404);
+            return null;
+        }
+        map.put("articles", articles);
+        map.put("title", category.getName());
+        return "category/cat";
+    }
     @RequestMapping(value = "/month/{month}/{page}")
     public String month(@PathVariable String month, @PathVariable int page, ModelMap map, HttpServletResponse response) throws IOException {
         page = page >= 1 ? page : 1;

@@ -64,7 +64,7 @@
                             {
                                 @if( cat.getType() == com.mvc.domain.DomainType.Tag )
                                 {
-                                    <a href="@url("category/tag/")@cat.getName()" class="tag-link-@cat.getCategoryId()" title="@cat.getArticleCount() 个话题" style="font-size: 8pt;">@cat.getName()</a>
+                                    <a href="@url("/category/tag/")@cat.getName()" class="tag-link-@cat.getCategoryId()" title="@cat.getArticleCount() 个话题" style="font-size: 8pt;">@cat.getName()</a>
                                 }
                             }
 
