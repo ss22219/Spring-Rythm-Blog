@@ -51,6 +51,7 @@ public class ArticleRepository extends BaseRepository<Article> {
         List<Category> list = getSession().createQuery("from Category where categoryId=" + categoryId).list();
         return list.size() > 0 ? list.get(0).getArticleCount() : 0;
     }
+
     public List<Article> getArticleByTag(String tag, int pageIndex, int pageSize) {
         List<Article> list = getSession().createQuery("select articles from Category as cat where cat.name=? and cat.type=1").setParameter(0, tag).setFirstResult((pageIndex - 1) * pageSize).setMaxResults(pageSize).list();
         for (Article article : list) {

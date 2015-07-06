@@ -17,19 +17,19 @@ public class SearchController {
     private ArticleService articleService;
 
     @RequestMapping("/{title}/{page}")
-    public String search(@PathVariable String title,@PathVariable int page,ModelMap map){
+    public String search(@PathVariable String title, @PathVariable int page, ModelMap map) {
         page = page >= 1 ? page : 1;
         Page<Article> articles = articleService.getArticleByName(title, page);
 
         map.put("articles", articles);
         map.put("title", title);
-        map.put("search",title);
+        map.put("search", title);
         return "/category/cat";
     }
 
     @RequestMapping("/{title}")
-    public String search(@PathVariable String title,ModelMap map){
-        return search(title,1,map);
+    public String search(@PathVariable String title, ModelMap map) {
+        return search(title, 1, map);
     }
 
 }

@@ -17,6 +17,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String hello(ModelMap map) {
+        // TODO: move to repository
         map.addAttribute("message", ((Setting) sessionFactory.openSession().createQuery("from Setting where key='blogDescription'").list().get(0)).getValue());
         return "index";
     }
